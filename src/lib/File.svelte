@@ -1,4 +1,5 @@
 <script>
+  import moment from 'moment';
   import { esbData } from "../Store.js";
 
   let files;
@@ -13,9 +14,11 @@
       // MPRN,Meter Serial Number,Read Value,Read Type,Read Date and End Time
       mprn: rowData[0],
       serial: rowData[1],
-      value: rowData[2],
+      units: parseFloat(rowData[2]),
       readType: rowData[3],
-      time: rowData[4],
+      time: moment(rowData[4], "DD-MM-YYYY hh:mm"),
+      // 09-02-2023 23:30
+      hour: moment(rowData[4], "DD-MM-YYYY hh:mm").hour(),
     }})
     esbData.set(parsedData)
   }
