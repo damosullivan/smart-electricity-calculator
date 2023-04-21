@@ -3,12 +3,24 @@ import moment from 'moment';
 
 export const esbData = writable([]);
 
-// rates
-export const standardRate = writable(0.43);
-export const peakRate = writable(0.47);
-export const dayRate = writable(0.45);
-export const nightRate = writable(0.20);
+
+// Smart
+export const peakRate = writable(47.94);
+export const dayRate = writable(45);
+export const nightRate = writable(24.49);
+export const nightBoostRate = writable(15);
+export const smartStandingCharge = writable(400);
+
+export const enableNightBoost = writable(false);
+
+// Standard
+export const standardRate = writable(43);
 export const standingCharge = writable(300);
+
+// Day/Night
+export const dnDayRate = writable(43);
+export const dnNightRate = writable(43);
+export const dnStandingCharge = writable(350);
 
 
 esbData.subscribe(() => {
@@ -24,6 +36,7 @@ export const totalDays = derived([minMoment, maxMoment], ([$a, $b]) => moment($b
 export const totalUnits = derived(esbData, $d => $d.map(j => j.units))
 export const peakUnits = derived(esbData, $d => $d.filter(i => i.hour > 17 && i.hour <= 19).map(j => j.units))
 export const nightUnits = derived(esbData, $d => $d.filter(i => i.hour > 23 || i.hour <= 8).map(j => j.units))
+export const nightBoostUnits = derived(esbData, $d => $d.filter(i => i.hour > 2 && i.hour <= 4).map(j => j.units))
 export const dayUnits = derived(esbData, $d => $d.filter(i => (i.hour > 8 && i.hour <= 17) || (i.hour > 19 && i.hour <= 23)).map(j => j.units))
 
 

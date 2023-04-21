@@ -11,66 +11,74 @@
     dayUnits,
     totalUnits,
     nightUnits,
+    nightBoostUnits,
     peakRate,
+    dnDayRate,
+    dnNightRate,
     dayRate,
     nightRate,
+    nightBoostRate,
     standingCharge,
     standardRate,
+    enableNightBoost,
   } from "../Store.js";
 
-  let totalValue = 0;
-  let totalUnitsValue = 0;
-  let peakUnitsValue = 0;
-  let dayUnitsValue = 0;
-  let totalDaysValue = 0;
-  let nightUnitsValue = 0;
-  let peakRateValue = 0;
-  let dayRateValue = 0;
-  let nightRateValue = 0;
-  let standingChargeValue = 0;
-  let standardRateValue = 0;
+  let totalUnitsSum = 0;
+  let peakUnitsSum = 0;
+  let dayUnitsSum = 0;
+  let nightUnitsSum = 0;
+  let nightBoostUnitsSum = 0;
+
   let minDate = moment().format("dddd, MMMM Do YYYY");
   let maxDate = moment().format("dddd, MMMM Do YYYY");
 
-  const formatUnitsAndRates = (name, unit, rate) => `${name} Units: ${unit.toFixed(2)} @ ${rate}c = €${(unit * rate).toFixed(2)}`;
-  const formatStandingCharge = (days, rate) => `Standing Charge: ${days} Days of €${rate} = €${(rate / 365 * days).toFixed(2)}`;
+  const formatUnitsAndRates = (name, unit, rate) =>
+    `${name} Units: ${unit.toFixed(2)} @ ${rate}c = €${(
+      (unit * rate) /
+      100
+    ).toFixed(2)}`;
+  const formatUnitsAndRatesTable = (name, unit, rate) =>
+    `<tr>
+      <td>${name} Units</td>
+      <td>${unit.toFixed(2)}</td>
+      <td>${rate}c</td>
+      <td>€${((unit * rate) / 100).toFixed(2)}</td>
+    </tr>`;
+
+  const formatStandingCharge = (days, rate) =>
+    `Standing Charge: ${days} Days of €${rate} = €${(
+      (rate / 365) *
+      days
+    ).toFixed(2)}`;
+  const formatStandingChargeTable = (days, rate) =>
+    `<tr>
+      <td>Standing Charge<td>
+      <td></td>
+      <td>${days} Days of €${rate}</td>
+      <td>€${((rate / 365) * days).toFixed(2)}</td>
+    </tr>`;
+
+  const formatTotalCharge = (totals) =>
+    `Total: €${totals.reduce(resuceSum, 0).toFixed(2)}`;
+  const formatTotalChargeTable = (totals) =>
+    `<tr><td>Total</td><td></td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
 
   const resuceSum = (partialSum, a) => partialSum + a;
 
-  total.subscribe((v) => {
-    totalValue = v;
-  });
-  peakRate.subscribe((v) => {
-    peakRateValue = v;
-  });
-  dayRate.subscribe((v) => {
-    dayRateValue = v;
-  });
-  nightRate.subscribe((v) => {
-    nightRateValue = v;
-  });
-  standingCharge.subscribe((v) => {
-    standingChargeValue = v;
-  });
-  standardRate.subscribe((v) => {
-    standardRateValue = v;
-  });
-  totalDays.subscribe((v) => {
-    totalDaysValue = v;
-  });
   totalUnits.subscribe((v) => {
-    totalUnitsValue = v.reduce(resuceSum, 0);
+    totalUnitsSum = v.reduce(resuceSum, 0);
   });
   peakUnits.subscribe((v) => {
-    console.log(v);
-    peakUnitsValue = v.reduce(resuceSum, 0);
+    peakUnitsSum = v.reduce(resuceSum, 0);
   });
   dayUnits.subscribe((v) => {
-    console.log(v);
-    dayUnitsValue = v.reduce(resuceSum, 0);
+    dayUnitsSum = v.reduce(resuceSum, 0);
   });
   nightUnits.subscribe((v) => {
-    nightUnitsValue = v.reduce(resuceSum, 0);
+    nightUnitsSum = v.reduce(resuceSum, 0);
+  });
+  nightBoostUnits.subscribe((v) => {
+    nightBoostUnitsSum = v.reduce(resuceSum, 0);
   });
   minMoment.subscribe((v) => {
     minDate = moment(v).format("MMMM Do YYYY");
@@ -81,26 +89,67 @@
 </script>
 
 <h2>
-  From <br /><strong>{minDate}</strong> to <strong>{maxDate}</strong
-  > <br /><small>({totalValue} data points)</small>, you used:
+  From <br /><strong>{minDate}</strong> to <strong>{maxDate}</strong>
+  <br /><small>({$total} data points)</small>, you used:
 </h2>
 
 <h3>Smart Tariff</h3>
 
 <ul>
-  <li>{formatUnitsAndRates("Day", dayUnitsValue, dayRateValue )}</li>
-  <li>{formatUnitsAndRates("Peak", peakUnitsValue, peakRateValue )}</li>
-  <li>{formatUnitsAndRates("Night", nightUnitsValue, nightRateValue )}</li>
-  <li>{formatStandingCharge(totalDaysValue, standingChargeValue )}</li>
-  <li>Total: €{((dayUnitsValue * dayRateValue) + (peakUnitsValue * peakRateValue) + (nightUnitsValue * nightRateValue) + (standingChargeValue / 365 * totalDaysValue)).toFixed(2)}</li>
+  <li>{formatUnitsAndRates("Day", dayUnitsSum, $dayRate)}</li>
+  <li>{formatUnitsAndRates("Peak", peakUnitsSum, $peakRate)}</li>
+  <li>
+    {formatUnitsAndRates(
+      "Night",
+      $enableNightBoost ? nightUnitsSum - nightBoostUnitsSum : nightUnitsSum,
+      $nightRate
+    )}
+  </li>
+  {#if $enableNightBoost}
+    <li>
+      {formatUnitsAndRates("Night Boost", nightBoostUnitsSum, $nightBoostRate)}
+    </li>
+  {/if}
+
+  <li>{formatStandingCharge($totalDays, $standingCharge)}</li>
+
+  <li>
+    {formatTotalCharge([
+      (dayUnitsSum * $dayRate) / 100,
+      (peakUnitsSum * $peakRate) / 100,
+      ((enableNightBoost ? nightUnitsSum - nightBoostUnitsSum : nightUnitsSum) *
+        $nightRate) /
+        100,
+      $enableNightBoost ? (nightBoostUnitsSum * $nightBoostRate) / 100 : 0,
+      ($standingCharge / 365) * $totalDays,
+    ])}
+  </li>
 </ul>
 
 <h3>Standard Tariff</h3>
 
 <ul>
-  <li>{formatUnitsAndRates("24 Hour", totalUnitsValue, standardRateValue )}</li>
-  <li>{formatStandingCharge(totalDaysValue, standingChargeValue )}</li>
-  <li>Total: €{((totalUnitsValue * standardRateValue) + (standingChargeValue / 365 * totalDaysValue)).toFixed(2)}</li>
-
+  <li>{formatUnitsAndRates("24 Hour", totalUnitsSum, $standardRate)}</li>
+  <li>{formatStandingCharge($totalDays, $standingCharge)}</li>
+  <li>
+    {formatTotalCharge([
+      (totalUnitsSum * $standardRate) / 100,
+      ($standingCharge / 365) * $totalDays,
+    ])}
+  </li>
 </ul>
 
+<h3>Day/Night Tariff</h3>
+
+<ul>
+  <li>{formatUnitsAndRates("Day", dayUnitsSum + peakUnitsSum, $dnDayRate)}</li>
+  <li>{formatUnitsAndRates("Night", nightUnitsSum, $dnNightRate)}</li>
+  <li>{formatStandingCharge($totalDays, $standingCharge)}</li>
+  <li>
+    {formatTotalCharge([
+      ((dayUnitsSum + peakUnitsSum) * $dnDayRate) / 100,
+      (nightUnitsSum * $dnNightRate) / 100,
+      ($standingCharge / 365) * $totalDays,
+    ])}
+  </li>
+</ul>

@@ -2,12 +2,16 @@
   // import svelteLogo from './assets/svelte.svg'
   import File from './lib/File.svelte'
   import Summary from './lib/Summary.svelte'
+  import Rates from './lib/Rates.svelte'
 </script>
 
 <main>
-  <h1>ESB Networks Unit Calculator</h1>
+  <h1>⚡ Smart Electricity Calculator ⚡</h1>
   <div class="card">
     <File />
+  </div>
+  <div class="card">
+    <Rates />
   </div>
   <div class="card">
     <Summary />

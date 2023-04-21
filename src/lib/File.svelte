@@ -36,7 +36,7 @@
   }
 </script>
 
-<label for="hdf">Upload HDF file:</label>
+<label for="hdf">Upload ESB Networks usage file:</label>
 <input accept="text/csv" bind:files id="hdf" name="hdf" type="file" />
 
 <!-- {#if files}
