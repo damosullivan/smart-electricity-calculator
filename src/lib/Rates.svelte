@@ -4,12 +4,14 @@
     peakRate,
     dayRate,
     nightRate,
-    nightBoostRate,
+    evRate,
     dnDayRate,
     dnNightRate,
     standingCharge,
     smartStandingCharge,
-    enableNightBoost,
+    enableEvRate,
+    evStartTime,
+    evEndTime,
     dnStandingCharge,
   } from "../Store.js";
 </script>
@@ -21,20 +23,25 @@
     <input type="text" bind:value={$dayRate} id="day" />
     <label for="night">Night Rate (c):</label>
     <input type="text" bind:value={$nightRate} id="night" />
-    {#if $enableNightBoost}
-      <label for="nightboost">Night Boost Rate (c):</label>
-      <input type="text" bind:value={$nightBoostRate} id="nightboost" />
-    {/if}
+
     <label for="peak">Peak Rate (c):</label>
     <input type="text" bind:value={$peakRate} id="peak" />
     <label for="standing">Standing Charge (€):</label>
     <input type="text" bind:value={$smartStandingCharge} id="standing" />
-    <label for="enableNightBoost">Night Boost:</label>
+    <label for="enableEvRate">EV Rate:</label>
     <input
       type="checkbox"
-      bind:checked={$enableNightBoost}
-      id="enableNightBoost"
+      bind:checked={$enableEvRate}
+      id="enableEvRate"
     />
+    {#if $enableEvRate}
+    <label for="nightboost">Ev Rate (c):</label>
+    <input type="text" bind:value={$evRate} id="nightboost" />
+    <label for="evStartTime">Ev Start:</label>
+    <input type="text" bind:value={$evStartTime} id="evStartTime" />
+    <label for="evEndTime">Ev End:</label>
+    <input type="text" bind:value={$evEndTime} id="evEndTime" />
+    {/if}
   </fieldset>
   <fieldset>
     <legend>Standard Rates</legend>

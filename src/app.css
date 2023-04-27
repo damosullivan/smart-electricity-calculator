@@ -44,7 +44,7 @@ h1 {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 button {
@@ -79,6 +79,7 @@ button:focus-visible {
   }
 }
 
+/* my css */
 form {
   text-align: left;
   display: flex;
@@ -90,5 +91,14 @@ form input {
 fieldset {
   width: 30%;
   display: inline-block;
-  height: 300px;
+  height: 400px;
 }
+table {
+  width: 100%;
+  text-align: right;
+}
+
+td:nth-child(1) {
+  text-align: left;
+}
+
