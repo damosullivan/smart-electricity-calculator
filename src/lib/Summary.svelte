@@ -8,8 +8,12 @@
     dnNightRate,
     dnStandingCharge,
     enableEvRate,
+    enableFitRate,
     evRate,
     evUnitsSum,
+    fitRate,
+    fitUnits,
+    fitUnitsSum,
     maxMoment,
     minMoment,
     nightRate,
@@ -24,11 +28,8 @@
     totalUnitsSum,
   } from "../Store.js";
 
-
-
   let minDate = moment().format("dddd, MMMM Do YYYY");
   let maxDate = moment().format("dddd, MMMM Do YYYY");
-
 
   const formatUnitsAndRatesTable = (name, unit, rate) =>
     `<tr>
@@ -47,7 +48,9 @@
     </tr>`;
 
   const formatTotalChargeTable = (totals) =>
-    `<tr><td>Total</td><td>${$totalUnitsSum.toFixed(2)}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
+    `<tr><td>Total</td><td>${($totalUnitsSum - $fitUnitsSum).toFixed(
+      2
+    )}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
 
   const resuceSum = (partialSum, a) => partialSum + a;
 
@@ -67,65 +70,68 @@
 <h3>Smart Tariff</h3>
 
 <table>
-  <tr><th></th><th>Units</th><th>Rate</th><th>Total</th></tr>
+  <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
   {@html formatUnitsAndRatesTable("Day", $dayUnitsSum, $dayRate)}
   {@html formatUnitsAndRatesTable("Peak", $peakUnitsSum, $peakRate)}
 
-    {@html formatUnitsAndRatesTable(
-      "Night",
-      $enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum,
-      $nightRate
-    )}
+  {@html formatUnitsAndRatesTable(
+    "Night",
+    $enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum,
+    $nightRate
+  )}
 
   {#if $enableEvRate}
-
-      {@html formatUnitsAndRatesTable("Ev", $evUnitsSum, $evRate)}
-
+    {@html formatUnitsAndRatesTable("Ev", $evUnitsSum, $evRate)}
   {/if}
 
   {@html formatStandingChargeTable($totalDays, $smartStandingCharge)}
 
+  {#if $enableFitRate}
+    {@html formatUnitsAndRatesTable("Exported", -$fitUnitsSum, $fitRate)}
+  {/if}
 
-    {@html formatTotalChargeTable([
-      ($dayUnitsSum * $dayRate) / 100,
-      ($peakUnitsSum * $peakRate) / 100,
-      (($enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum) *
-        $nightRate) /
-        100,
-      $enableEvRate ? ($evUnitsSum * $evRate) / 100 : 0,
-      ($smartStandingCharge / 365) * $totalDays,
-    ])}
-
+  {@html formatTotalChargeTable([
+    ($dayUnitsSum * $dayRate) / 100,
+    ($peakUnitsSum * $peakRate) / 100,
+    (($enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum) *
+      $nightRate) /
+      100,
+    $enableEvRate ? ($evUnitsSum * $evRate) / 100 : 0,
+    ($smartStandingCharge / 365) * $totalDays,
+    (-$fitUnitsSum * $fitRate) / 100,
+  ])}
 </table>
 
 <h3>Standard Tariff</h3>
 
 <table>
-  <tr><th></th><th>Units</th><th>Rate</th><th>Total</th></tr>
+  <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
 
   {@html formatUnitsAndRatesTable("24 Hour", $totalUnitsSum, $standardRate)}
   {@html formatStandingChargeTable($totalDays, $standingCharge)}
 
-    {@html formatTotalChargeTable([
-      ($totalUnitsSum * $standardRate) / 100,
-      ($standingCharge / 365) * $totalDays,
-    ])}
-
+  {@html formatTotalChargeTable([
+    ($totalUnitsSum * $standardRate) / 100,
+    ($standingCharge / 365) * $totalDays,
+  ])}
 </table>
 
 <h3>Day/Night Tariff</h3>
 
 <table>
-  <tr><th></th><th>Units</th><th>Rate</th><th>Total</th></tr>
+  <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
 
-  {@html formatUnitsAndRatesTable("Day", $dayUnitsSum + $peakUnitsSum, $dnDayRate)}
+  {@html formatUnitsAndRatesTable(
+    "Day",
+    $dayUnitsSum + $peakUnitsSum,
+    $dnDayRate
+  )}
   {@html formatUnitsAndRatesTable("Night", $nightUnitsSum, $dnNightRate)}
   {@html formatStandingChargeTable($totalDays, $dnStandingCharge)}
 
-    {@html formatTotalChargeTable([
-      (($dayUnitsSum + $peakUnitsSum) * $dnDayRate) / 100,
-      ($nightUnitsSum * $dnNightRate) / 100,
-      ($dnStandingCharge / 365) * $totalDays,
-    ])}
-
+  {@html formatTotalChargeTable([
+    (($dayUnitsSum + $peakUnitsSum) * $dnDayRate) / 100,
+    ($nightUnitsSum * $dnNightRate) / 100,
+    ($dnStandingCharge / 365) * $totalDays,
+  ])}
 </table>
