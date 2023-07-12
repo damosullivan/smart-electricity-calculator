@@ -88,11 +88,11 @@
     {@html formatUnitsAndRatesTable("Ev", $evUnitsSum, $evRate)}
   {/if}
 
-  {@html formatStandingChargeTable($totalDays, $smartStandingCharge)}
-
   {#if $enableFitRate}
     {@html formatUnitsAndRatesTable("Exported", -$fitUnitsSum, $fitRate)}
   {/if}
+
+  {@html formatStandingChargeTable($totalDays, $smartStandingCharge)}
 
   {@html formatTotalFitChargeTable([
     ($dayUnitsSum * $dayRate) / 100,
