@@ -42,7 +42,7 @@
   }
 </script>
 
-<label for="hdf">Upload ESB Networks usage file:</label>
+<label for="hdf">To begin, upload your <a rel="noreferrer" target="_blank" href="https://www.esbnetworks.ie/existing-connections/meters-and-readings/my-smart-data">ESB Networks HDF file</a>:</label>
 <input accept="text/csv" bind:files id="hdf" name="hdf" type="file" />
 
 <!-- {#if files}

@@ -1,8 +1,9 @@
 <script>
   // import svelteLogo from './assets/svelte.svg'
-  import File from './lib/File.svelte'
-  import Summary from './lib/Summary.svelte'
-  import Rates from './lib/Rates.svelte'
+  import File from "./lib/File.svelte";
+  import Summary from "./lib/Summary.svelte";
+  import Rates from "./lib/Rates.svelte";
+  import { total } from "./Store.js";
 </script>
 
 <main>
@@ -10,12 +11,14 @@
   <div class="card">
     <File />
   </div>
-  <div class="card">
-    <Rates />
-  </div>
-  <div class="card">
-    <Summary />
-  </div>
+  {#if ($total>0)}
+    <div class="card">
+      <Rates />
+    </div>
+    <div class="card">
+      <Summary />
+    </div>
+  {/if}
 
 </main>
 
