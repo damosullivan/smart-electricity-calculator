@@ -5,6 +5,8 @@
     dnNightRate,
     dnStandingCharge,
     enableEvRate,
+    freeSaturdays,
+    freeSundays,
     enableFitRate,
     evEndTime,
     evRate,
@@ -34,6 +36,10 @@
     {/if}
     <label for="standing-smart">Standing Charge (<code>€/year</code>):</label>
     <input type="text" bind:value={$smartStandingCharge} id="standing-smart" />
+    <label for="freeSaturdays">Free Saturdays:</label>
+    <input type="checkbox" bind:checked={$freeSaturdays} id="freeSaturdays" />
+    <label for="freeSundays">Free Sundays:</label>
+    <input type="checkbox" bind:checked={$freeSundays} id="freeSundays" />
     <label for="enableEvRate">EV Rate:</label>
     <input type="checkbox" bind:checked={$enableEvRate} id="enableEvRate" />
     {#if $enableEvRate}

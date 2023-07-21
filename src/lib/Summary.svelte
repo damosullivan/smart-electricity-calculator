@@ -8,11 +8,14 @@
     dnNightRate,
     dnStandingCharge,
     enableEvRate,
+    freeSaturdays,
+    freeSundays,
+    saturdayUnitsSum,
+    sundayUnitsSum,
     enableFitRate,
     evRate,
     evUnitsSum,
     fitRate,
-    fitUnits,
     fitUnitsSum,
     maxMoment,
     minMoment,
@@ -52,7 +55,7 @@
       2
     )}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
   const formatTotalChargeTable = (totals) =>
-    `<tr><td>Total</td><td>${($totalUnitsSum).toFixed(
+    `<tr><td>Total</td><td>${$totalUnitsSum.toFixed(
       2
     )}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
 
@@ -84,10 +87,16 @@
     $nightRate
   )}
 
+
+  {#if $freeSaturdays}
+    {@html formatUnitsAndRatesTable("Saturday", $saturdayUnitsSum, 0)}
+  {/if}
+  {#if $freeSundays}
+    {@html formatUnitsAndRatesTable("Sunday ", $sundayUnitsSum, 0)}
+  {/if}
   {#if $enableEvRate}
     {@html formatUnitsAndRatesTable("Ev", $evUnitsSum, $evRate)}
   {/if}
-
   {#if $enableFitRate}
     {@html formatUnitsAndRatesTable("Exported", -$fitUnitsSum, $fitRate)}
   {/if}

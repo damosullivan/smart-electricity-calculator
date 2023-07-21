@@ -25,6 +25,7 @@
           time: moment(rowData[4], "DD-MM-YYYY hh:mm"),
           // 09-02-2023 23:30
           hour: moment(rowData[4], "DD-MM-YYYY hh:mm").hour(),
+          day: moment(rowData[4], "DD-MM-YYYY hh:mm").day(),
         };
       });
     esbData.set(parsedData);
