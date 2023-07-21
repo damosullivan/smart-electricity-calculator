@@ -44,6 +44,7 @@
 
 <label for="hdf">To begin, upload your <a rel="noreferrer" target="_blank" href="https://www.esbnetworks.ie/existing-connections/meters-and-readings/my-smart-data">ESB Networks HDF file</a>:</label>
 <input accept="text/csv" bind:files id="hdf" name="hdf" type="file" />
+<p><small>Note: this file does not leave your computer. All calculations happen in your browser.</small></p>
 
 <!-- {#if files}
   <h2>Selected files:</h2>
