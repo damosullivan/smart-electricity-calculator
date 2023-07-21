@@ -62,17 +62,31 @@
   const resuceSum = (partialSum, a) => partialSum + a;
 
   minMoment.subscribe((v) => {
-    minDate = moment(v).format("MMMM Do YYYY");
+    minDate = moment(v).format("YYYY-MM-DD");
   });
   maxMoment.subscribe((v) => {
-    maxDate = moment(v).format("MMMM Do YYYY");
+    maxDate = moment(v).format("YYYY-MM-DD");
   });
 </script>
 
 <h2>
-  From <br /><strong>{minDate}</strong> to <strong>{maxDate}</strong>
-  <small>({$total} data points)</small>, you used:
+  Summary from <input
+    disabled={true}
+    type="date"
+    value={minDate}
+    min={minDate}
+    max={maxDate}
+  />
+  to
+  <input
+    disabled={true}
+    type="date"
+    value={maxDate}
+    min={minDate}
+    max={maxDate}
+  />
 </h2>
+<p><small>({$total} data points)</small></p>
 
 <h3>Smart Tariff</h3>
 
@@ -86,7 +100,6 @@
     $enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum,
     $nightRate
   )}
-
 
   {#if $freeSaturdays}
     {@html formatUnitsAndRatesTable("Saturday", $saturdayUnitsSum, 0)}
