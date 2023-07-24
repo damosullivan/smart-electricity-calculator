@@ -36,6 +36,18 @@
     processFileData(fileReader.result);
   };
 
+  function loadEabHdfFile(url, name, defaultType = "text/csv") {
+    fetch("/EAB_HDF.csv")
+      .then((response) => response.blob())
+      .then(
+        (data) =>
+          new File([data], name, {
+            type: data.type || defaultType,
+          })
+      )
+      .then((file) => (files = [file]));
+  }
+
   fileReader.onload = readFile;
 
   $: if (files) {
@@ -43,9 +55,34 @@
   }
 </script>
 
-<label for="hdf">To begin, upload your <a rel="noreferrer" target="_blank" href="https://www.esbnetworks.ie/existing-connections/meters-and-readings/my-smart-data">ESB Networks HDF file</a>:</label>
+<label for="hdf"
+  >To begin, upload your <a
+    rel="noreferrer"
+    target="_blank"
+    href="https://www.esbnetworks.ie/existing-connections/meters-and-readings/my-smart-data"
+    >ESB Networks HDF file</a
+  >:</label
+>
 <input accept="text/csv" bind:files id="hdf" name="hdf" type="file" />
-<p><small>Note: this file does not leave your computer. All calculations happen in your browser.</small></p>
+<p>
+  <small
+    >Note: this file does not leave your computer. All calculations happen in
+    your browser.</small
+  >
+</p>
+
+{#if !files}
+  <p>
+    <strong>Or</strong> <input type="button" value="Click Here" on:click={loadEabHdfFile} /> to
+    use an
+    <a
+      rel="noreferrer"
+      target="_blank"
+      href="https://www.bonkers.ie/guides/gas-electricity/national-average-energy-consumption/"
+      >Estimated Annual Bill (EAB)</a
+    >.
+  </p>
+{/if}
 
 <!-- {#if files}
   <h2>Selected files:</h2>
