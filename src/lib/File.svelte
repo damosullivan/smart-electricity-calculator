@@ -1,6 +1,6 @@
 <script>
   import moment from "moment";
-  import { esbData } from "../Store.js";
+  import { esbData, showCoffee } from "../Store.js";
 
   let files;
   let fileReader = new FileReader();
@@ -29,6 +29,8 @@
         };
       });
     esbData.set(parsedData);
+    showCoffee.set(true);
+
   };
 
   const readFile = () => {

@@ -9,6 +9,8 @@ esbData.subscribe(() => {
   console.log(`Updating esbData...`);
 });
 
+export const showCoffee = writable(false);
+
 
 // Smart
 export const peakRate = writable(47.94);

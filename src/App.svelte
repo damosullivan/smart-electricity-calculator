@@ -3,7 +3,7 @@
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
   import Rates from "./lib/Rates.svelte";
-  import { total } from "./Store.js";
+  import { total, showCoffee } from "./Store.js";
 </script>
 
 <main>
@@ -11,7 +11,7 @@
   <div class="card">
     <File />
   </div>
-  {#if ($total>0)}
+  {#if $total > 0}
     <div class="card">
       <Rates />
     </div>
@@ -19,10 +19,37 @@
       <Summary />
     </div>
   {/if}
+  {#if $showCoffee}
+    <div id="coffee">
+      <a
+        ><img
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+          alt="Buy Me A Coffee"
+          style="height: 60px !important;width: 217px !important;"
+        /></a
+      >
+    </div>
+  {/if}
 
+  <div id="footer">
+    <p>
+      Made with ❤️ by <a
+        href="https://twitter.com/_damienos"
+        target="_blank"
+        rel="noreferrer">Damien</a
+      >
+    </p>
+  </div>
 </main>
 
 <style>
+  #coffee {
+    text-align: center;
+  }
+
+  #footer {
+    text-align: center;
+  }
   /* .logo {
     height: 6em;
     padding: 1.5em;
