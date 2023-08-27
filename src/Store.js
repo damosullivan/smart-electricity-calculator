@@ -17,7 +17,7 @@ export const peakRate = writable(47.94);
 export const dayRate = writable(45);
 export const nightRate = writable(24.49);
 export const evRate = writable(15);
-export const fitRate = writable(17.59);
+export const fitRate = writable(20);
 export const smartStandingCharge = writable(400);
 
 export const evStartTime = writable(2);
@@ -29,11 +29,14 @@ export const freeSundays = writable(false);
 
 // Standard
 export const standardRate = writable(43);
+export const standardFitRate = writable(21);
 export const standingCharge = writable(300);
+
 
 // Day/Night
 export const dnDayRate = writable(43);
 export const dnNightRate = writable(23);
+export const dnFitRate = writable(22);
 export const dnStandingCharge = writable(350);
 
 
@@ -72,5 +75,3 @@ export const dayUnitsSum = derived(dayUnits, $u => $u.reduce(sum, 0))
 export const fitUnitsSum = derived(fitUnits, $u => $u.reduce(sum, 0))
 export const saturdayUnitsSum = derived(saturdayUnits, $u => $u.reduce(sum, 0))
 export const sundayUnitsSum = derived(sundayUnits, $u => $u.reduce(sum, 0))
-
-

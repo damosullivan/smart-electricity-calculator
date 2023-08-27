@@ -5,27 +5,29 @@
     dayRate,
     dayUnitsSum,
     dnDayRate,
+    dnFitRate,
     dnNightRate,
     dnStandingCharge,
     enableEvRate,
-    freeSaturdays,
-    freeSundays,
-    saturdayUnitsSum,
-    sundayUnitsSum,
     enableFitRate,
     evRate,
     evUnitsSum,
     fitRate,
     fitUnitsSum,
+    freeSaturdays,
+    freeSundays,
     maxMoment,
     minMoment,
     nightRate,
     nightUnitsSum,
     peakRate,
     peakUnitsSum,
+    saturdayUnitsSum,
     smartStandingCharge,
+    standardFitRate,
     standardRate,
     standingCharge,
+    sundayUnitsSum,
     total,
     totalDays,
     totalUnitsSum,
@@ -94,7 +96,6 @@
   <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
   {@html formatUnitsAndRatesTable("Day", $dayUnitsSum, $dayRate)}
   {@html formatUnitsAndRatesTable("Peak", $peakUnitsSum, $peakRate)}
-
   {@html formatUnitsAndRatesTable(
     "Night",
     $enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum,
@@ -134,11 +135,20 @@
   <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
 
   {@html formatUnitsAndRatesTable("24 Hour", $totalUnitsSum, $standardRate)}
+  {#if $enableFitRate}
+    {@html formatUnitsAndRatesTable(
+      "Exported",
+      -$fitUnitsSum,
+      $standardFitRate
+    )}
+  {/if}
+
   {@html formatStandingChargeTable($totalDays, $standingCharge)}
 
   {@html formatTotalChargeTable([
     ($totalUnitsSum * $standardRate) / 100,
     ($standingCharge / 365) * $totalDays,
+    (-$fitUnitsSum * $standardFitRate) / 100,
   ])}
 </table>
 
@@ -153,11 +163,15 @@
     $dnDayRate
   )}
   {@html formatUnitsAndRatesTable("Night", $nightUnitsSum, $dnNightRate)}
+  {#if $enableFitRate}
+    {@html formatUnitsAndRatesTable("Exported", -$fitUnitsSum, $dnFitRate)}
+  {/if}
   {@html formatStandingChargeTable($totalDays, $dnStandingCharge)}
 
   {@html formatTotalChargeTable([
     (($dayUnitsSum + $peakUnitsSum) * $dnDayRate) / 100,
     ($nightUnitsSum * $dnNightRate) / 100,
     ($dnStandingCharge / 365) * $totalDays,
+    (-$fitUnitsSum * $dnFitRate) / 100,
   ])}
 </table>

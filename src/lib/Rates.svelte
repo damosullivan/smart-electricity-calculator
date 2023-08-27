@@ -2,19 +2,21 @@
   import {
     dayRate,
     dnDayRate,
+    dnFitRate,
     dnNightRate,
     dnStandingCharge,
     enableEvRate,
-    freeSaturdays,
-    freeSundays,
     enableFitRate,
     evEndTime,
     evRate,
     evStartTime,
     fitRate,
+    freeSaturdays,
+    freeSundays,
     nightRate,
     peakRate,
     smartStandingCharge,
+    standardFitRate,
     standardRate,
     standingCharge,
   } from "../Store.js";
@@ -51,19 +53,29 @@
       <input type="text" bind:value={$evEndTime} id="evEndTime" />
     {/if}
   </fieldset>
+
   <fieldset>
     <legend>Standard Rates</legend>
     <label for="standard">Standard Rate (<code>c/kWh</code>):</label>
     <input type="text" bind:value={$standardRate} id="standard" />
+    {#if $enableFitRate}
+      <label for="standardFit">Feed In Tarrif (<code>c/kWh</code>):</label>
+      <input type="text" bind:value={$standardFitRate} id="standardFit" />
+    {/if}
     <label for="standing">Standing Charge (<code>€/year</code>):</label>
     <input type="text" bind:value={$standingCharge} id="standing" />
   </fieldset>
+
   <fieldset>
     <legend>Day/Night Rates</legend>
     <label for="standard-dn">Standard Rate (<code>c/kWh</code>):</label>
     <input type="text" bind:value={$dnDayRate} id="standard-dn" />
     <label for="night-dn">Night Rate (<code>c/kWh</code>):</label>
     <input type="text" bind:value={$dnNightRate} id="night-dn" />
+    {#if $enableFitRate}
+      <label for="dnFit">Feed In Tarrif (<code>c/kWh</code>):</label>
+      <input type="text" bind:value={$dnFitRate} id="dnFit" />
+    {/if}
     <label for="standing-dn">Standing Charge (<code>€/year</code>):</label>
     <input type="text" bind:value={$dnStandingCharge} id="standing-dn" />
   </fieldset>
