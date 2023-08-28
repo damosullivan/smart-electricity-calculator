@@ -52,12 +52,8 @@
       <td>€${((rate / 365) * days).toFixed(2)}</td>
     </tr>`;
 
-  const formatTotalFitChargeTable = (totals) =>
-    `<tr><td>Total</td><td>${($totalUnitsSum - $fitUnitsSum).toFixed(
-      2
-    )}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
   const formatTotalChargeTable = (totals) =>
-    `<tr><td>Total</td><td>${$totalUnitsSum.toFixed(
+    `<tr><td>Total</td><td>${($totalUnitsSum - $fitUnitsSum).toFixed(
       2
     )}</td><td></td><td>€${totals.reduce(resuceSum, 0).toFixed(2)}</td></tr>`;
 
@@ -117,7 +113,7 @@
 
   {@html formatStandingChargeTable($totalDays, $smartStandingCharge)}
 
-  {@html formatTotalFitChargeTable([
+  {@html formatTotalChargeTable([
     ($dayUnitsSum * $dayRate) / 100,
     ($peakUnitsSum * $peakRate) / 100,
     (($enableEvRate ? $nightUnitsSum - $evUnitsSum : $nightUnitsSum) *
