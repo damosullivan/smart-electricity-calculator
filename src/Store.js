@@ -57,10 +57,10 @@ export const sundayUnits = derived(importData, $d => $d.filter(i => i.day == 0).
 
 export const chargableImportedData = derived([importData, freeSaturdays, freeSundays], ([$d, $freeSat, $freeSun]) => $d.filter(j => !(j.day === 6 && $freeSat) && !(j.day === 0 && $freeSun)))
 
-export const dayUnits = derived(chargableImportedData, $d => $d.filter(i => (i.hour > 8 && i.hour <= 17) || (i.hour > 19 && i.hour <= 23)).map(j => j.kWh))
-export const peakUnits = derived(chargableImportedData, $d => $d.filter(i => i.hour > 17 && i.hour <= 19).map(j => j.kWh))
-export const nightUnits = derived(chargableImportedData, $d => $d.filter(i => i.hour > 23 || i.hour <= 8).map(j => j.kWh))
-export const evUnits = derived([chargableImportedData, evStartTime, evEndTime], ([$data, $start, $end]) => $data.filter(i => i.hour > $start && i.hour <= $end).map(j => j.kWh))
+export const dayUnits = derived(chargableImportedData, $d => $d.filter(i => (i.hour >= 8 && i.hour < 17) || (i.hour >= 19 && i.hour < 23)).map(j => j.kWh))
+export const peakUnits = derived(chargableImportedData, $d => $d.filter(i => i.hour >= 17 && i.hour < 19).map(j => j.kWh))
+export const nightUnits = derived(chargableImportedData, $d => $d.filter(i => i.hour >= 23 || i.hour < 8).map(j => j.kWh))
+export const evUnits = derived([chargableImportedData, evStartTime, evEndTime], ([$data, $start, $end]) => $data.filter(i => i.hour >= $start && i.hour < $end).map(j => j.kWh))
 
 
 export const enableFitRate = derived(exportedData, $d => $d.length > 0);
