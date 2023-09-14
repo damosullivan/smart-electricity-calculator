@@ -1,0 +1,5 @@
+MPRN,Meter Serial Number,Read Value,Read Type,Read Date and End Time
+10000000000,22222222,1000,Active Import Interval (kW),01-01-2023 17:30
+10000000000,22222222,1000,Active Import Interval (kW),01-01-2023 18:00
+10000000000,22222222,1000,Active Import Interval (kW),01-01-2023 18:30
+10000000000,22222222,1000,Active Import Interval (kW),01-01-2023 19:00
