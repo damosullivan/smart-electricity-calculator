@@ -29,7 +29,7 @@
 
   <div id="footer">
     <p>
-      Made with ❤️ by <a
+      Made with ☕ by <a
         href="https://twitter.com/_damienos"
         target="_blank"
         rel="noreferrer">Damien</a
