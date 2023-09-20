@@ -20,6 +20,12 @@
     </div>
   {/if}
   {#if $showCoffee}
+    <div id="coffee-side" title="Buy me a ">
+      <a href="https://www.buymeacoffee.com/damienos" target="_blank" rel="noreferrer" >
+        <img src="/buymeacoffeemini.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 40px !important;" >
+      </a>
+    </div>
+
     <div id="coffee">
       <a href="https://www.buymeacoffee.com/damienos" target="_blank" rel="noreferrer" >
         <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
@@ -46,6 +52,17 @@
   #footer {
     text-align: center;
   }
+
+  #coffee-side {
+    position: fixed;
+    right: 0;
+    top: 50%;
+  }
+
+  #coffee-side img {
+    border-radius: 5px;
+  }
+
   /* .logo {
     height: 6em;
     padding: 1.5em;
