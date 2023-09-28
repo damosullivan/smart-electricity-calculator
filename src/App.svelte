@@ -21,13 +21,13 @@
   {/if}
   {#if $showCoffee}
     <div id="coffee-side" title="Buy me a ">
-      <a href="https://www.buymeacoffee.com/damienos" target="_blank" rel="noreferrer" >
+      <a href="https://www.buymeacoffee.com/damienos?button=side" target="_blank" rel="noreferrer" >
         <img src="/buymeacoffeemini.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 40px !important;" >
       </a>
     </div>
 
     <div id="coffee">
-      <a href="https://www.buymeacoffee.com/damienos" target="_blank" rel="noreferrer" >
+      <a href="https://www.buymeacoffee.com/damienos?button=bottom" target="_blank" rel="noreferrer" >
         <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
       </a>
     </div>
