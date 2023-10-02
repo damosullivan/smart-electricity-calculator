@@ -36,7 +36,7 @@
   <div id="footer">
     <p>
       Made with ☕ by <a
-        href="https://twitter.com/_damienos"
+        href="https://www.linkedin.com/in/damienosullivans/"
         target="_blank"
         rel="noreferrer">Damien</a
       >
