@@ -3,7 +3,7 @@
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
   import Rates from "./lib/Rates.svelte";
-  import { total, showCoffee } from "./Store.js";
+  import { esbData, showCoffee } from "./Store.js";
 </script>
 
 <main>
@@ -11,7 +11,7 @@
   <div class="card">
     <File />
   </div>
-  {#if $total > 0}
+  {#if $esbData.length > 0}
     <div class="card">
       <Rates />
     </div>

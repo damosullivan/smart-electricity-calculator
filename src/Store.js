@@ -41,14 +41,29 @@ export const dnStandingCharge = writable(350);
 
 
 
-export const total = derived(esbData, $d => $d.length);
-
 export const minMoment = derived(esbData, $d => moment.min($d.map(e => e.time)))
 export const maxMoment = derived(esbData, $d => moment.max($d.map(e => e.time)))
 export const totalDays = derived([minMoment, maxMoment], ([$a, $b]) => moment($b).diff(moment($a), 'days'))
 
-export const importData = derived(esbData, $d => $d.filter(j => !!j.imported))
-export const exportedData = derived(esbData, $d => $d.filter(j => !j.imported))
+// filter days here
+export const minPossibleDate = derived(minMoment, $m => moment($m).format("YYYY-MM-DD"));
+export const maxPossibleDate = derived(maxMoment, $m => moment($m).format("YYYY-MM-DD"));
+
+export const selectedStartDate = writable("2000-01-01");
+export const selectedEndDate = writable("2000-12-31");
+
+minPossibleDate.subscribe((min) => {selectedStartDate.set(min)})
+maxPossibleDate.subscribe((min) => {selectedEndDate.set(min)})
+
+export const esbDataTimeFrame = derived([esbData, selectedStartDate, selectedEndDate], ([$d, $s, $e]) => $d.filter(e => e.time.isSameOrAfter($s) && e.time.isSameOrBefore($e) ))
+export const totalSelectedDays = derived([selectedStartDate, selectedEndDate], ([$s, $e]) => moment($e).diff(moment($s), 'days'))
+
+
+
+export const total = derived(esbDataTimeFrame, $d => $d.length);
+
+export const importData = derived(esbDataTimeFrame, $d => $d.filter(j => !!j.imported))
+export const exportedData = derived(esbDataTimeFrame, $d => $d.filter(j => !j.imported))
 
 export const totalUnits = derived(importData, $d => $d.map(j => j.kWh))
 

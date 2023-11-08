@@ -6,6 +6,7 @@
   import TotalChargeRow from "./Components/TotalChargeRow.svelte";
 
   import {
+    esbDataTimeFrame,
     dayRate,
     dayUnitsSum,
     dnDayRate,
@@ -20,51 +21,55 @@
     fitUnitsSum,
     freeSaturdays,
     freeSundays,
-    maxMoment,
-    minMoment,
+    minPossibleDate,
+    maxPossibleDate,
     nightRate,
     nightUnitsSum,
     peakRate,
     peakUnitsSum,
     saturdayUnitsSum,
+    selectedStartDate,
+    selectedEndDate,
     smartStandingCharge,
     standardFitRate,
     standardRate,
     standingCharge,
     sundayUnitsSum,
     total,
-    totalDays,
+    totalSelectedDays,
     totalUnitsSum,
   } from "../Store.js";
 
-  let minDate = moment().format("dddd, MMMM Do YYYY");
-  let maxDate = moment().format("dddd, MMMM Do YYYY");
-
-  minMoment.subscribe((v) => {
-    minDate = moment(v).format("YYYY-MM-DD");
-  });
-  maxMoment.subscribe((v) => {
-    maxDate = moment(v).format("YYYY-MM-DD");
-  });
+  const resetDatePickers = () => {
+    selectedStartDate.set($minPossibleDate);
+    selectedEndDate.set($maxPossibleDate);
+  };
 </script>
 
 <h2>
   Summary from <input
-    disabled={true}
+    disabled={false}
     type="date"
-    value={minDate}
-    min={minDate}
-    max={maxDate}
+    bind:value={$selectedStartDate}
+    min={$minPossibleDate}
+    max={moment
+      .min([moment($maxPossibleDate), moment($selectedEndDate).add(-1, "d")])
+      .format("YYYY-MM-DD")}
   />
   to
   <input
-    disabled={true}
+    disabled={false}
     type="date"
-    value={maxDate}
-    min={minDate}
-    max={maxDate}
+    bind:value={$selectedEndDate}
+    min={moment
+      .max([moment($minPossibleDate), moment($selectedStartDate).add(1, "d")])
+      .format("YYYY-MM-DD")}
+    max={$maxPossibleDate}
   />
+  <small>(<a on:click={resetDatePickers}>Reset</a>)</small>
 </h2>
+<p class="nf"><mark>☝️ New Feature! ☝️</mark></p>
+
 <p><small>({$total} data points)</small></p>
 
 <h3>Smart Tariff</h3>
@@ -92,7 +97,7 @@
     <UnitAndRatesRow name="Exported" unit={-$fitUnitsSum} rate={$fitRate} />
   {/if}
 
-  <StandingChargeRow days={$totalDays} rate={$smartStandingCharge} />
+  <StandingChargeRow days={$totalSelectedDays} rate={$smartStandingCharge} />
 
   <TotalChargeRow
     totals={[
@@ -102,7 +107,7 @@
         $nightRate) /
         100,
       $enableEvRate ? ($evUnitsSum * $evRate) / 100 : 0,
-      ($smartStandingCharge / 365) * $totalDays,
+      ($smartStandingCharge / 365) * $totalSelectedDays,
       (-$fitUnitsSum * $fitRate) / 100,
     ]}
   />
@@ -122,12 +127,12 @@
     />
   {/if}
 
-  <StandingChargeRow days={$totalDays} rate={$standingCharge} />
+  <StandingChargeRow days={$totalSelectedDays} rate={$standingCharge} />
 
   <TotalChargeRow
     totals={[
       ($totalUnitsSum * $standardRate) / 100,
-      ($standingCharge / 365) * $totalDays,
+      ($standingCharge / 365) * $totalSelectedDays,
       (-$fitUnitsSum * $standardFitRate) / 100,
     ]}
   />
@@ -147,14 +152,20 @@
   {#if $enableFitRate}
     <UnitAndRatesRow name="Exported" unit={-$fitUnitsSum} rate={$dnFitRate} />
   {/if}
-  <StandingChargeRow days={$totalDays} rate={$dnStandingCharge} />
+  <StandingChargeRow days={$totalSelectedDays} rate={$dnStandingCharge} />
 
   <TotalChargeRow
     totals={[
       (($dayUnitsSum + $peakUnitsSum) * $dnDayRate) / 100,
       ($nightUnitsSum * $dnNightRate) / 100,
-      ($dnStandingCharge / 365) * $totalDays,
+      ($dnStandingCharge / 365) * $totalSelectedDays,
       (-$fitUnitsSum * $dnFitRate) / 100,
     ]}
   />
 </table>
+
+<style>
+  .nf {
+    margin-left: 225px;
+  }
+</style>
