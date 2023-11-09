@@ -1,5 +1,5 @@
 export function onRequestGet(context) {
-  return fetch("https://developers.buymeacoffee.com/api/v1/supporters", {
+  return new Request("https://developers.buymeacoffee.com/api/v1/supporters", {
     headers: {
       Authorization: `Bearer ${context.env.COFFEE_API_KEY}`,
     },
@@ -12,6 +12,4 @@ export function onRequestGet(context) {
     .map((d) => {
       d.supporter_name;
     });
-
-
 }
