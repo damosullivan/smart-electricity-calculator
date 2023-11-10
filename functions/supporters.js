@@ -7,9 +7,10 @@ export async function onRequestGet(context) {
   })
 
 	const result = await response.json()
+  const supporter_names = result.data.map(s => s.supporter_name);
 
   return new Response(
-		JSON.stringify(result),
+		JSON.stringify(supporter_names),
 		{
 			headers: {
 				// we'll set a CORS header to allow access to this resource from everywhere
