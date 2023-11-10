@@ -19,7 +19,7 @@ export async function onRequestGet(context) {
     response = await fetchPage(context, page);
     supporter_names.push(...response.data.map((s) => s.supporter_name));
     page++;
-  } while (!!response.next_page);
+  } while (!!response.next_page_url);
 
   return new Response(JSON.stringify(supporter_names), {
     headers: {
