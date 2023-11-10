@@ -6,35 +6,45 @@
   let supporters = [];
   let others = 0;
 
-  onMount(async function () {
-    const response = await fetch(
-      "https://www.smartelectricitycalculator.ie/supporters"
-    );
-    const data = await response.json();
+  if (import.meta.env.DEV) {
+    supporters = [
+      "Me",
+      "Myself",
+      "Coffee",
+      "@elonmusk",
+    ];
+    others = 17;
+  } else {
+    onMount(async function () {
+      const response = await fetch(
+        "https://www.smartelectricitycalculator.ie/supporters"
+      );
+      const data = await response.json();
 
-    supporters = data.filter((name) => name !== "Someone");
-    others = data.filter((name) => name === "Someone").length;
-  });
+      supporters = data.filter((name) => name !== "Someone");
+      others = data.filter((name) => name === "Someone").length;
+    });
+  }
 </script>
 
 <div id="supporters">
-<h3>❤️ Special thanks to the following for their kind support ❤️</h3>
-<ul>
-  {#each supporters as supporter_name}
-    {#if supporter_name.startsWith("@")}
-      <li><TwitterLink name={supporter_name} /></li>
-    {:else}
-      <li>{supporter_name}</li>
-    {/if}
-  {/each}
-  <li>
-    and <a
-      href="https://www.buymeacoffee.com/damienos"
-      target="_blank"
-      rel="noreferrer">{others} more</a
-    >
-  </li>
-</ul>
+  <h3>❤️ Special thanks to the following for their kind support ❤️</h3>
+  <ul>
+    {#each supporters as supporter_name}
+      {#if supporter_name.startsWith("@")}
+        <li><TwitterLink name={supporter_name} /></li>
+      {:else}
+        <li>{supporter_name}</li>
+      {/if}
+    {/each}
+    <li>
+      and <a
+        href="https://www.buymeacoffee.com/damienos"
+        target="_blank"
+        rel="noreferrer">{others} more</a
+      >
+    </li>
+  </ul>
 </div>
 
 <style>
@@ -43,7 +53,7 @@
     border-width: 1px;
   }
 
-h3 {
+  h3 {
     text-align: center;
   }
 
