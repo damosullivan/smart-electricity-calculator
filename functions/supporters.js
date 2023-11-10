@@ -24,8 +24,7 @@ export async function onRequestGet(context) {
   const supporter_names = supporters
     .reverse()
     .sort((a, b) => b.support_coffees - a.support_coffees)
-    .map((s) => s.supporter_name)
-    .filter((s) => s !== "Someone");
+    .map((s) => s.supporter_name);
 
   return new Response(JSON.stringify(supporter_names), {
     headers: {

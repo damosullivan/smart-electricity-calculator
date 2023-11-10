@@ -2,6 +2,7 @@
   // import svelteLogo from './assets/svelte.svg'
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
+  import Supporters from "./lib/Supporters.svelte";
   import Rates from "./lib/Rates.svelte";
   import { esbData, showCoffee } from "./Store.js";
 </script>
@@ -18,17 +19,35 @@
     <div class="card">
       <Summary />
     </div>
+  {:else}
+    <Supporters />
   {/if}
   {#if $showCoffee}
     <div id="coffee-side" title="Buy me a ">
-      <a href="https://www.buymeacoffee.com/damienos?button=side" target="_blank" rel="noreferrer" >
-        <img src="/buymeacoffeemini.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 40px !important;" >
+      <a
+        href="https://www.buymeacoffee.com/damienos?button=side"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src="/buymeacoffeemini.png"
+          alt="Buy Me A Coffee"
+          style="height: 40px !important;width: 40px !important;"
+        />
       </a>
     </div>
 
     <div id="coffee">
-      <a href="https://www.buymeacoffee.com/damienos?button=bottom" target="_blank" rel="noreferrer" >
-        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
+      <a
+        href="https://www.buymeacoffee.com/damienos?button=bottom"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+          alt="Buy Me A Coffee"
+          style="height: 60px !important;width: 217px !important;"
+        />
       </a>
     </div>
   {/if}
