@@ -28,10 +28,10 @@
     {/if}
   {/each}
   <li>
-    <a
+    and <a
       href="https://www.buymeacoffee.com/damienos"
       target="_blank"
-      rel="noreferrer">and {others} more</a
+      rel="noreferrer">{others} more</a
     >
   </li>
 </ul>
