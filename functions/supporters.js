@@ -11,7 +11,7 @@ async function fetchPage(context, page) {
 }
 
 export async function onRequestGet(context) {
-  const page = 1;
+  let page = 1;
   const supporter_names = [];
 
   do {
