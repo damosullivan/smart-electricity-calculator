@@ -15,10 +15,10 @@ export async function onRequestGet(context) {
   const supporter_names = [];
 
   do {
-    const response = fetchPage(context, page);
+    const response = await fetchPage(context, page);
     supporter_names.push(...response.data.map((s) => s.supporter_name));
     page++;
-  } while (response.next_page);
+  } while (!!response.next_page);
 
   return new Response(JSON.stringify(supporter_names), {
     headers: {
