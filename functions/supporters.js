@@ -5,6 +5,10 @@ async function fetchPage(context, page) {
       headers: {
         Authorization: `Bearer ${context.env.COFFEE_API_KEY}`,
       },
+      cf: {
+        cacheTtl: 60,
+        cacheEverything: true,
+      },
     }
   );
   return await response.json();
@@ -28,8 +32,9 @@ export async function onRequestGet(context) {
 
   return new Response(JSON.stringify(supporter_names), {
     headers: {
-      // we'll set a CORS header to allow access to this resource from everywhere
       "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "max-age=1800",
+      "Content-Type": "application/json",
     },
   });
 }
