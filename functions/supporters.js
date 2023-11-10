@@ -13,13 +13,18 @@ async function fetchPage(context, page) {
 export async function onRequestGet(context) {
   let page = 1;
   let response;
-  const supporter_names = [];
+  const supporters = [];
 
   do {
     response = await fetchPage(context, page);
-    supporter_names.push(...response.data.map((s) => s.supporter_name));
+    supporters.push(...response.data);
     page++;
   } while (!!response.next_page_url);
+
+  const supporter_names = supporters
+    .sort((a, b) => b.support_coffees - a.support_coffees)
+    .map((s) => s.supporter_name)
+    .filter((s) => s !== "Someone");
 
   return new Response(JSON.stringify(supporter_names), {
     headers: {
