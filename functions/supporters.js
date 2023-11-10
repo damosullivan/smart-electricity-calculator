@@ -22,6 +22,7 @@ export async function onRequestGet(context) {
   } while (!!response.next_page_url);
 
   const supporter_names = supporters
+    .reverse()
     .sort((a, b) => b.support_coffees - a.support_coffees)
     .map((s) => s.supporter_name)
     .filter((s) => s !== "Someone");
