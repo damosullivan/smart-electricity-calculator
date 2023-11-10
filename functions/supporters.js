@@ -25,7 +25,6 @@ addEventListener('fetch', (event) => {
 
 // 2. event handler which returns a Response object
 async function handleRequest(event) {
-	const url = `http://ws.audioscrobbler.com/2.0/?format=json&method=user.getrecenttracks&user=your-username&limit=1&api_key=${LASTFM_API_KEY}`
 
 	// we'll use `fetch` in combination with `await` so we don't have to manually resolve the returned `Promise`
 	// this is why we defined the whole function as `async`, so we can use `await`
