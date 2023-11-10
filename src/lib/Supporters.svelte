@@ -31,7 +31,7 @@
     <a
       href="https://www.buymeacoffee.com/damienos"
       target="_blank"
-      rel="noreferrer">and {others} others</a
+      rel="noreferrer">and {others} more</a
     >
   </li>
 </ul>
