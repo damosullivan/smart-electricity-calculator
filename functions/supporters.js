@@ -12,10 +12,11 @@ async function fetchPage(context, page) {
 
 export async function onRequestGet(context) {
   let page = 1;
+  let response;
   const supporter_names = [];
 
   do {
-    const response = await fetchPage(context, page);
+    response = await fetchPage(context, page);
     supporter_names.push(...response.data.map((s) => s.supporter_name));
     page++;
   } while (!!response.next_page);
