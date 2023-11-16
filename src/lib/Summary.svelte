@@ -68,7 +68,6 @@
   />
   <small>(<a on:click={resetDatePickers}>Reset</a>)</small>
 </h2>
-<p class="nf"><mark>☝️ New Feature! ☝️</mark></p>
 
 <p><small>({$total} data points)</small></p>
 
@@ -163,9 +162,3 @@
     ]}
   />
 </table>
-
-<style>
-  .nf {
-    margin-left: 225px;
-  }
-</style>
