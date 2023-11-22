@@ -5,10 +5,10 @@ async function fetchPage(context, page) {
       headers: {
         Authorization: `Bearer ${context.env.COFFEE_API_KEY}`,
       },
-      cf: {
-        cacheTtl: 21600, // 6 hours
-        cacheEverything: true,
-      },
+      // cf: {
+      //   cacheTtl: 21600, // 6 hours
+      //   cacheEverything: true,
+      // },
     }
   );
   return await response.json();
