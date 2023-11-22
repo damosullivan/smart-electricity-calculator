@@ -6,7 +6,7 @@ async function fetchPage(context, page) {
         Authorization: `Bearer ${context.env.COFFEE_API_KEY}`,
       },
       cf: {
-        cacheTtl: 14400, // 4 hours
+        cacheTtl: 21600, // 6 hours
         cacheEverything: true,
       },
     }
@@ -33,7 +33,7 @@ export async function onRequestGet(context) {
   return new Response(JSON.stringify(supporter_names), {
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Cache-Control": "public, max-age=14400, s-maxage=14400", // 4 hours
+      "Cache-Control": "public, max-age=21600, s-maxage=21600", // 6 hours
       "Content-Type": "application/json",
     },
   });
