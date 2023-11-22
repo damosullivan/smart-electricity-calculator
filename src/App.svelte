@@ -60,6 +60,27 @@
         rel="noreferrer">Damien</a
       >
     </p>
+    <p>
+      <small>
+        <a
+          href="https://share.hsforms.com/1PAd45iIRQLaxNYDyF5AMxw4m14q"
+          target="_blank"
+          rel="noreferrer">Contact me</a
+        >
+        |
+        <a
+          href="https://share.hsforms.com/1PAd45iIRQLaxNYDyF5AMxw4m14q"
+          target="_blank"
+          rel="noreferrer">Report a bug</a
+        >
+        |
+        <a
+          href="https://share.hsforms.com/1PAd45iIRQLaxNYDyF5AMxw4m14q"
+          target="_blank"
+          rel="noreferrer">Request a feature</a
+        >
+      </small>
+    </p>
   </div>
 </main>
 
