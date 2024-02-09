@@ -2,9 +2,10 @@
   // import svelteLogo from './assets/svelte.svg'
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
+  import Solar from "./lib/Solar.svelte";
   import Supporters from "./lib/Supporters.svelte";
   import Rates from "./lib/Rates.svelte";
-  import { esbData, showCoffee } from "./Store.js";
+  import { esbData, showCoffee, total, enableFitRate } from "./Store.js";
 </script>
 
 <main>
@@ -13,12 +14,17 @@
     <File />
   </div>
   {#if $esbData.length > 0}
-    <div class="card">
+    <div class="card rates">
       <Rates />
     </div>
-    <div class="card">
+    <div class="card summary">
       <Summary />
     </div>
+    {#if !$enableFitRate && $total > 1000}
+      <div class="card solar">
+        <Solar />
+      </div>
+    {/if}
   {:else}
     <Supporters />
   {/if}
@@ -86,6 +92,7 @@
 
 <style>
   #coffee {
+    margin-top: 50px;
     text-align: center;
   }
 
@@ -101,6 +108,19 @@
 
   #coffee-side img {
     border-radius: 5px;
+  }
+
+  .summary,
+  .solar {
+    border: 1px solid #ccc;
+  }
+
+  .rates {
+    padding: 0;
+  }
+
+  .card {
+    margin-top: 50px;
   }
 
   /* .logo {

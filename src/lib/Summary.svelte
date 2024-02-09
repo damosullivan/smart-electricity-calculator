@@ -6,7 +6,6 @@
   import TotalChargeRow from "./Components/TotalChargeRow.svelte";
 
   import {
-    esbDataTimeFrame,
     dayRate,
     dayUnitsSum,
     dnDayRate,
@@ -47,7 +46,7 @@
 </script>
 
 <h2>
-  Summary from <input
+  Usage from <input
     disabled={false}
     type="date"
     bind:value={$selectedStartDate}
@@ -66,7 +65,7 @@
       .format("YYYY-MM-DD")}
     max={$maxPossibleDate}
   />
-  <small>(<a on:click={resetDatePickers}>Reset</a>)</small>
+  <small>(<a id="reset" on:click={resetDatePickers}>Reset</a>)</small>
 </h2>
 
 <p><small>({$total} data points)</small></p>
@@ -162,3 +161,9 @@
     ]}
   />
 </table>
+
+<style>
+  #reset {
+    cursor: pointer
+  }
+</style>
