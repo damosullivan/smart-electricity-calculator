@@ -91,7 +91,7 @@ form input {
 fieldset {
   width: 30%;
   display: inline-block;
-  height: 470px;
+  height: auto;
 }
 table {
   width: 100%;
