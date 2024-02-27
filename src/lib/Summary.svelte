@@ -8,6 +8,7 @@
   import {
     dayRate,
     dayUnitsSum,
+    dnDayUnitsSum,
     dnDayRate,
     dnFitRate,
     dnNightRate,
@@ -23,6 +24,7 @@
     minPossibleDate,
     maxPossibleDate,
     nightRate,
+    dnNightUnitsSum,
     nightUnitsSum,
     peakRate,
     peakUnitsSum,
@@ -92,7 +94,12 @@
     <UnitAndRatesRow name="Ev" unit={$evUnitsSum} rate={$evRate} />
   {/if}
   {#if $enableFitRate}
-    <UnitAndRatesRow name="Exported" unit={-$fitUnitsSum} rate={$fitRate} />
+    <UnitAndRatesRow
+      name="Exported"
+      unit={-$fitUnitsSum}
+      rate={$fitRate}
+      percent={false}
+    />
   {/if}
 
   <StandingChargeRow days={$totalSelectedDays} rate={$smartStandingCharge} />
@@ -116,12 +123,18 @@
 <table>
   <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
 
-  <UnitAndRatesRow name="24 Hour" unit={$totalUnitsSum} rate={$standardRate} />
+  <UnitAndRatesRow
+    name="24 Hour"
+    unit={$totalUnitsSum}
+    rate={$standardRate}
+    percent={false}
+  />
   {#if $enableFitRate}
     <UnitAndRatesRow
       name="Exported"
       unit={-$fitUnitsSum}
       rate={$standardFitRate}
+      percent={false}
     />
   {/if}
 
@@ -140,22 +153,23 @@
 
 <table>
   <tr><th /><th>Units</th><th>Rate</th><th>Total</th></tr>
-  <UnitAndRatesRow
-    name="Day"
-    unit={$dayUnitsSum + $peakUnitsSum}
-    rate={$dnDayRate}
-  />
-  <UnitAndRatesRow name="Night" unit={$nightUnitsSum} rate={$dnNightRate} />
+  <UnitAndRatesRow name="Day" unit={$dnDayUnitsSum} rate={$dnDayRate} />
+  <UnitAndRatesRow name="Night" unit={$dnNightUnitsSum} rate={$dnNightRate} />
 
   {#if $enableFitRate}
-    <UnitAndRatesRow name="Exported" unit={-$fitUnitsSum} rate={$dnFitRate} />
+    <UnitAndRatesRow
+      name="Exported"
+      unit={-$fitUnitsSum}
+      rate={$dnFitRate}
+      percent={false}
+    />
   {/if}
   <StandingChargeRow days={$totalSelectedDays} rate={$dnStandingCharge} />
 
   <TotalChargeRow
     totals={[
-      (($dayUnitsSum + $peakUnitsSum) * $dnDayRate) / 100,
-      ($nightUnitsSum * $dnNightRate) / 100,
+      ($dnDayUnitsSum * $dnDayRate) / 100,
+      ($dnNightUnitsSum * $dnNightRate) / 100,
       ($dnStandingCharge / 365) * $totalSelectedDays,
       (-$fitUnitsSum * $dnFitRate) / 100,
     ]}
@@ -164,6 +178,6 @@
 
 <style>
   #reset {
-    cursor: pointer
+    cursor: pointer;
   }
 </style>
