@@ -67,7 +67,9 @@ maxPossibleDate.subscribe((min) => {
 export const esbDataTimeFrame = derived(
   [esbData, selectedStartDate, selectedEndDate],
   ([$d, $s, $e]) =>
-    $d.filter((e) => e.time.isSameOrAfter($s) && e.time.isSameOrBefore($e))
+    $d.filter(
+      (e) => e.time.isSameOrAfter($s, "day") && e.time.isSameOrBefore($e, "day")
+    )
 );
 export const totalSelectedDays = derived(
   [selectedStartDate, selectedEndDate],
