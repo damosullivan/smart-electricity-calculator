@@ -120,11 +120,7 @@ export const evUnits = derived(
 );
 
 export const dnDayUnits = derived(importData, ($d) =>
-  $d
-    .filter(
-      (i) => (i.hour >= 8 && i.hour < 17) || (i.hour >= 19 && i.hour < 23)
-    )
-    .map((j) => j.kWh)
+  $d.filter((i) => i.hour >= 8 && i.hour < 23).map((j) => j.kWh)
 );
 export const dnNightUnits = derived(importData, ($d) =>
   $d.filter((i) => i.hour >= 23 || i.hour < 8).map((j) => j.kWh)
