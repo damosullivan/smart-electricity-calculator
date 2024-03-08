@@ -7,12 +7,7 @@
   let others = 0;
 
   if (import.meta.env.DEV) {
-    supporters = [
-      "Me",
-      "Myself",
-      "Coffee",
-      "@elonmusk",
-    ];
+    supporters = ["Me", "Myself", "Coffee", "@elonmusk"];
     others = 17;
   } else {
     onMount(async function () {
@@ -57,12 +52,9 @@
     text-align: center;
   }
 
-  /* ul {
-    -moz-column-count: 4;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 4;
-    -webkit-column-gap: 20px;
-    column-count: 4;
-    column-gap: 20px;
-  } */
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    list-style-type: square;
+  }
 </style>
