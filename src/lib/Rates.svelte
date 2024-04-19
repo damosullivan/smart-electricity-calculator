@@ -27,11 +27,10 @@
     <legend>Smart Rates</legend>
     <label for="day">Day Rate (<code>c/kWh</code>):</label>
     <input type="text" bind:value={$dayRate} id="day" />
-    <label for="night">Night Rate (<code>c/kWh</code>):</label>
-    <input type="text" bind:value={$nightRate} id="night" />
-
     <label for="peak">Peak Rate (<code>c/kWh</code>):</label>
     <input type="text" bind:value={$peakRate} id="peak" />
+    <label for="night">Night Rate (<code>c/kWh</code>):</label>
+    <input type="text" bind:value={$nightRate} id="night" />
     {#if $enableFitRate}
       <label for="fit">Feed In Tarrif (<code>c/kWh</code>):</label>
       <input type="text" bind:value={$fitRate} id="fit" />

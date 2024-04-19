@@ -11,12 +11,12 @@ esbData.subscribe(() => {
 export const showCoffee = writable(false);
 
 // Smart
-export const peakRate = writable(47.94);
-export const dayRate = writable(45);
-export const nightRate = writable(24.49);
-export const evRate = writable(15);
-export const fitRate = writable(20);
-export const smartStandingCharge = writable(400);
+export const peakRate = writable(31.93);
+export const dayRate = writable(30.47);
+export const nightRate = writable(16.32);
+export const evRate = writable(7.54);
+export const fitRate = writable(24.0);
+export const smartStandingCharge = writable(300.91);
 
 export const evStartTime = writable(2);
 export const evEndTime = writable(5);
@@ -26,9 +26,9 @@ export const freeSaturdays = writable(false);
 export const freeSundays = writable(false);
 
 // Standard
-export const standardRate = writable(43);
-export const standardFitRate = writable(21);
-export const standingCharge = writable(300);
+export const standardRate = writable(33.31);
+export const standardFitRate = writable(24.0);
+export const standingCharge = writable(302.49);
 
 // Day/Night
 export const dnDayRate = writable(43);
