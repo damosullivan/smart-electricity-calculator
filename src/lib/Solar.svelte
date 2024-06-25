@@ -91,6 +91,7 @@
   can be used to determine<br /> <strong>your</strong> solar system needs:
 </p>
 
+<h3>Panels</h3>
 <table>
   <tr>
     <th>Estimated annual usage:</th>
@@ -109,10 +110,26 @@
   </tr>
   <tr>
     <th>Guide price:</th>
-    <td><small>(€1000/kWp for solar panels only)</small></td>
+    <td><small>(€1000/kWp for solar panels)</small></td>
     <td>€{suggestedArray * 1000}</td>
   </tr>
 </table>
+
+<h3>Batteries <small>(100% optional)</small></h3>
+<table>
+  <tr>
+    <th>Suggested battery size:</th>
+    <td><small>(2 x <code>solar array</code> for evening users,<br />1.5 x <code>solar array</code> for daytime users)</small></td>
+    <td>{suggestedArray * 1.5} - {suggestedArray * 2} kWh</td>
+  </tr>
+  <tr>
+    <th>Guide price:</th>
+    <td><small>(€420/kWh for battery)</small></td>
+    <td>€{suggestedArray * 1.5 * 420} - €{suggestedArray * 2 * 420}</td>
+  </tr>
+
+</table>
+
 
 <style>
   table {

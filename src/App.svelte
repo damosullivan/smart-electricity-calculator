@@ -1,9 +1,8 @@
 <script>
-  // import svelteLogo from './assets/svelte.svg'
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
   import Solar from "./lib/Solar.svelte";
-  import Supporters from "./lib/Supporters.svelte";
+  // import Supporters from "./lib/Supporters.svelte";
   import Rates from "./lib/Rates.svelte";
   import { esbData, showCoffee, total, enableFitRate } from "./Store.js";
 </script>
@@ -25,8 +24,8 @@
         <Solar />
       </div>
     {/if}
-  {:else}
-    <Supporters />
+  <!-- {:else}
+    <Supporters /> -->
   {/if}
   {#if $showCoffee}
     <div id="coffee-side" title="Buy me a ">
