@@ -98,6 +98,10 @@
     margin-top: 50px;
   }
 
+  h1{
+    text-align: center;
+  }
+
   /* .logo {
     height: 6em;
     padding: 1.5em;
