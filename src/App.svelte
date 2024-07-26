@@ -2,7 +2,7 @@
   import File from "./lib/File.svelte";
   import Summary from "./lib/Summary.svelte";
   import Solar from "./lib/Solar.svelte";
-  // import Supporters from "./lib/Supporters.svelte";
+  import Supporters from "./lib/Supporters.svelte";
   import Rates from "./lib/Rates.svelte";
   import { esbData, showCoffee, total, enableFitRate } from "./Store.js";
 </script>
@@ -24,24 +24,10 @@
         <Solar />
       </div>
     {/if}
-  <!-- {:else}
-    <Supporters /> -->
+  {:else}
+    <Supporters />
   {/if}
   {#if $showCoffee}
-    <div id="coffee-side" title="Buy me a ">
-      <a
-        href="https://www.buymeacoffee.com/damienos?button=side"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <img
-          src="/buymeacoffeemini.png"
-          alt="Buy Me A Coffee"
-          style="height: 40px !important;width: 40px !important;"
-        />
-      </a>
-    </div>
-
     <div id="coffee">
       <a
         href="https://www.buymeacoffee.com/damienos?button=bottom"
@@ -97,16 +83,6 @@
 
   #footer {
     text-align: center;
-  }
-
-  #coffee-side {
-    position: fixed;
-    right: 0;
-    top: 50%;
-  }
-
-  #coffee-side img {
-    border-radius: 5px;
   }
 
   .summary,

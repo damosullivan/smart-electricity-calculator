@@ -58,7 +58,7 @@
 </script>
 
 <label for="hdf"
-  >To begin, upload your <a
+  >To begin, upload your <code>"30-minute readings in kW"</code> <a
     rel="noreferrer"
     target="_blank"
     href="https://www.esbnetworks.ie/existing-connections/meters-and-readings/my-smart-data"
