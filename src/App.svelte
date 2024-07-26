@@ -53,11 +53,11 @@
         rel="noreferrer">Damien</a
       >
      @
-      <a
+      <code><a
         href="https://github.com/damosullivan/smart-electricity-calculator"
         target="_blank"
         rel="noreferrer">damosullivan/smart-electricity-calculator</a
-      >
+      ></code>
     </p>
   </div>
 </main>
