@@ -26,8 +26,10 @@
         <Solar />
       </div>
     {/if}
+<!--
   {:else}
     <Supporters />
+-->
   {/if}
   {#if $showCoffee}
     <div id="coffee">
